@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <title>Angular-WebApi-Jasmine</title>
+</head>
+    <body>
+        <div ng-controller="controller1">
+            <h1>{{ one }}</h1>
+            <h2>{{ two }}</h2>            
+        </div>
+
+        <div ng-controller="controller2">
+            <h1>{{ one }}</h1>
+            <h2>{{ two }}</h2>
+        </div>
+
+        <div ng-controller="controller3 as vm">
+            <h1>{{ vm.one }}</h1>
+            <h2>{{ vm.two }}</h2>
+        </div>
+        
+        <div ng-controller="httpController">
+            <h1>{{ one }}</h1>
+            <h2>{{ two }}</h2>
+        </div>
+
+        <script src="scripts/angular.js"></script>
+        <script src="app.js"></script>
+        <script src="controllers.js"></script>
+    </body>
+</html>
