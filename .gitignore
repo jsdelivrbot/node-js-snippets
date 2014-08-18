@@ -88,3 +88,8 @@ x64/
 build/
 [Bb]in/
 [Oo]bj/
+
+# Web Stream
+*.iws
+workspace.xml
+tasks.xml
