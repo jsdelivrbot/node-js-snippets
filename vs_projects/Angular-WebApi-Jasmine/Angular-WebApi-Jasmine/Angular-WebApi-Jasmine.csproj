@@ -73,16 +73,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.js" />
+    <Content Include="Content\jasmine\jasmine.css" />
+    <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="controllers.js" />
     <Content Include="ControllerSpec.js" />
-    <Content Include="css\jasmine.css" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js" />
-    <Content Include="scripts\jasmine-html.js" />
-    <Content Include="scripts\jasmine.js" />
+    <Content Include="scripts\jasmine-samples\Player.js" />
+    <Content Include="scripts\jasmine-samples\PlayerSpec.js" />
+    <Content Include="scripts\jasmine-samples\Song.js" />
+    <Content Include="scripts\jasmine-samples\SpecHelper.js" />
+    <Content Include="scripts\jasmine\boot.js" />
+    <Content Include="scripts\jasmine\console.js" />
+    <Content Include="scripts\jasmine\jasmine-html.js" />
+    <Content Include="scripts\jasmine\jasmine.js" />
     <Content Include="SpecRunner.html" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -97,6 +104,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="scripts\angular.min.js.map" />
+    <Content Include="Views\Jasmine\SpecRunner.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
