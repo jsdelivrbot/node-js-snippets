@@ -5,21 +5,25 @@
 </head>
     <body>
         <div ng-controller="controller1">
+            controller1
             <h1>{{ one }}</h1>
             <h2>{{ two }}</h2>            
         </div>
 
         <div ng-controller="controller2">
+            controller2
             <h1>{{ one }}</h1>
             <h2>{{ two }}</h2>
         </div>
 
         <div ng-controller="controller3 as vm">
+            controller3 as vm
             <h1>{{ vm.one }}</h1>
             <h2>{{ vm.two }}</h2>
         </div>
         
         <div ng-controller="httpController">
+            httpController
             <h1>{{ one }}</h1>
             <h2>{{ two }}</h2>
         </div>
