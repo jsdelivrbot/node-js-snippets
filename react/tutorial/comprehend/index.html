@@ -1,0 +1,154 @@
+<html>
+<head>
+    <title>Hello React</title>
+    <script src="https://fb.me/react-0.13.1.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.1.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+</head>
+<body>
+<div id="app"></div>
+<script type="text/jsx">
+    var HelloUser = React.createClass({
+        getInitialState: function(){
+            return {
+                username: '@kimsk'
+            }
+        },
+        handleChange: function(e){
+            this.setState({
+                username: e.target.value
+            });
+        },
+        render: function(){
+            return (
+                    <div>
+                        Hello {this.state.username} <br />
+                        Change Name: <input type="text" value={this.state.username} onChange={this.handleChange} />
+                    </div>
+            )
+        }
+    });
+
+    var HelloUser2 = React.createClass({
+        render: function(){
+            return (
+                    <div> Hello, {this.props.name}</div>
+            )
+        }
+    });
+
+    var FriendsContainer = React.createClass({
+        getInitialState: function(){
+            return {
+                name: 'Tyler McGinnis',
+                friends: ['Jake Lingwall', 'Murphy Randall', 'Merrick Christensen'],
+            }
+        },
+        addFriend: function(friend){
+            this.setState({
+                friends: this.state.friends.concat([friend])
+            });
+        },
+        render: function(){
+            return (
+                    <div>
+                        <h3> Name: {this.state.name} </h3>
+                        <AddFriend addNew={this.addFriend} />
+                        <ShowList names={this.state.friends} />
+                    </div>
+            )
+        }
+
+    });
+
+    var AddFriend = React.createClass({
+        getInitialState: function(){
+            return {
+                newFriend: ''
+            }
+        },
+        updateNewFriend: function(e){
+            this.setState({
+                newFriend: e.target.value
+            });
+        },
+        handleAddNew: function(){
+            this.props.addNew(this.state.newFriend);
+            this.setState({
+                newFriend: ''
+            });
+        },
+        render: function(){
+            return (
+                    <div>
+                        <input type="text" value={this.state.newFriend} onChange={this.updateNewFriend} />
+                        <button onClick={this.handleAddNew}> Add Friend </button>
+                    </div>
+            );
+        }
+    });
+
+    var ShowList = React.createClass({
+        getDefaultProps: function(){
+            return {
+                names: []
+            }
+        },
+        render: function(){
+            var listItems = this.props.names.map(function(friend){
+                return <li> {friend} </li>;
+            });
+            return (
+                    <div>
+                        <h3> Friends </h3>
+                        <ul>
+                            {listItems}
+                        </ul>
+                    </div>
+            )
+        },
+
+        // Invoked once before first render
+        componentWillMount: function(){
+            // Calling setState here does not cause a re-render
+            alert('In Component Will Mount');
+        },
+
+
+        // Invoked once after the first render
+        componentDidMount: function(){
+            // You now have access to this.getDOMNode()
+            alert('In Component Did Mount');
+        },
+
+        // Invoked whenever there is a prop change
+        // Called BEFORE render
+        componentWillReceiveProps: function(nextProps){
+            // Not called for the initial render
+            // Previous props can be accessed by this.props
+            // Calling setState here does not trigger an additional re-render
+            alert('In Component Will Receive Props');
+        },
+
+        // Called IMMEDIATELY before a component is unmounted
+        componentWillUnmount: function(){}
+    });
+    var HelloWorld = React.createClass({
+        render: function(){
+            return (
+                    <div>
+                        <HelloUser2/>
+                        <HelloUser/>
+                        <FriendsContainer/>
+                    </div>
+            )
+        }
+    });
+
+    React.render(
+            <HelloWorld />,
+            document.getElementById('app'));
+</script>
+</body>
+</html>
