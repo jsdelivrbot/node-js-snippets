@@ -30,3 +30,29 @@ gulp.task('watch', function(){
 });
 
 gulp.task('default', ['watch']);
+
+gulp.task('build', function(){
+    gulp.src(path.JS)
+        .pipe(react())
+        .pipe(concat(path.MINIFIED_OUT))
+        .pipe(uglify())
+        .pipe(gulp.dest(path.DEST_BUILD));
+});
+
+gulp.task('replaceHTML', function(){
+    gulp.src(path.HTML)
+        .pipe(htmlreplace({
+            'js': 'build/' + path.MINIFIED_OUT
+        }))
+        .pipe(gulp.dest(path.DEST));
+});
+
+gulp.task('production', ['replaceHTML', 'build']);
+
+gulp.task('test-gulp', function(){
+   gulp.src(['./src/js/App.js', './src/js/Child.js', './src/js/Parent.js'])
+    .pipe(react())
+    .pipe(concat('test.js'))
+       .pipe(uglify())
+    .pipe(gulp.dest('.'));
+});
