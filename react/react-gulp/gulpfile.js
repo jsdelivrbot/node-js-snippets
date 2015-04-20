@@ -32,7 +32,8 @@ gulp.task('watch', function(){
 gulp.task('default', ['watch']);
 
 gulp.task('build', function(){
-    gulp.src(path.JS)
+    //gulp.src(path.JS)
+    gulp.src(['./src/js/Child.js', './src/js/Parent.js', './src/js/App.js'])
         .pipe(react())
         .pipe(concat(path.MINIFIED_OUT))
         .pipe(uglify())
