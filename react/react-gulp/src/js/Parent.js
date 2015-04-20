@@ -11,4 +11,4 @@ var Parent = React.createClass({
     }
 });
 
-module.exports = "Parent";
+module.exports = Parent;
