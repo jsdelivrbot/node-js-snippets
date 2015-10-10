@@ -1,0 +1,17 @@
+{
+  "name": "mocha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine-node": "^1.14.5",
+    "karma": "^0.13.9",
+    "karma-nyan-reporter": "^0.2.2",
+    "selenium-webdriver": "^2.46.1"
+  }
+}
