@@ -10,7 +10,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "css-loader": "^0.22.0",
+    "style-loader": "^0.13.0",
     "webpack": "^1.12.3",
     "webpack-dev-server": "^1.12.1"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4"
   }
 }
