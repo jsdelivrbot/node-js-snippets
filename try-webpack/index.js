@@ -6,7 +6,7 @@ require(['./util-async.js'], function(addAsync){
 })
 
 
-var css = require('style!css!./my.css');
+var css = require('./my.css');
 console.log(css);
 
 var $ = require('jquery');
