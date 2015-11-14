@@ -1,0 +1,27 @@
+{
+  "name": "rxjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "basic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.1.2",
+    "del": "^2.0.2",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-mocha": "^2.1.3",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5",
+    "mocha": "^2.3.3",
+    "run-sequence": "^1.1.4"
+  },
+  "dependencies": {
+    "rx": "^4.0.6"
+  }
+}
