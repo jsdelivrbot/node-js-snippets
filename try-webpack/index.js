@@ -15,3 +15,8 @@ import $ from 'jquery';
 setTimeout(function(){
   $('#h1Txt').css('color', 'red');
 }, 10000);
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+ReactDOM.render(<h1>Hello, React!</h1>, document.getElementById('reactDiv'));
