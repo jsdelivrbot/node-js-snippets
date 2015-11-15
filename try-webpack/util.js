@@ -2,4 +2,4 @@ function add(x, y){
   return x + y;
 }
 
-module.exports = add;
+export { add as default };
