@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "webpack": "webpack",
+    "clean": "rm -rf ./build",
+    "test": "webpack --config test.config.js && mocha ./build/test.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +14,7 @@
     "babel-core": "^6.1.21",
     "babel-loader": "^6.1.0",
     "babel-preset-es2015": "^6.1.18",
+    "mocha": "^2.3.4",
     "path": "^0.12.7",
     "webpack": "^1.12.3"
   }
