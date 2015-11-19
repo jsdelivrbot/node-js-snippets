@@ -1,0 +1,25 @@
+{
+  "name": "try-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.1.21",
+    "babel-loader": "^6.1.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "css-loader": "^0.22.0",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.3",
+    "webpack-dev-server": "^1.12.1"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4"
+  }
+}
