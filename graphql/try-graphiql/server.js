@@ -34,16 +34,16 @@ console.log('Started on http://localhost:8080/');
 
 // data, userType, and schema from http://graphql.org/docs/getting-started/
 var data = {
-  "1": {
-    "id": "1",
+  1: {
+    "id": 1,
     "name": "Dan"
   },
-  "2": {
-    "id": "2",
+  2: {
+    "id": 2,
     "name": "Lee"
   },
-  "3": {
-    "id": "3",
+  3: {
+    "id": 3,
     "name": "Nick"
   }
 };
@@ -51,7 +51,7 @@ var data = {
 var userType = new GraphQLObjectType({
   name: 'User',
   fields: {
-    id: { type: GraphQLString },
+    id: { type: GraphQLInt },
     name: { type: GraphQLString },
   }
 });
@@ -63,7 +63,7 @@ var schema = new GraphQLSchema({
       user: {
         type: userType,
         args: {
-          id: { type: GraphQLString }
+          id: { type: GraphQLInt }
         },
         resolve: function (_, args) {
           return data[args.id];
