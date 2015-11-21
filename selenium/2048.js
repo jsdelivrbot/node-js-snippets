@@ -14,6 +14,7 @@ var locators =
 
 var browser = new webdriver
 					.Builder()
+					.usingServer('http://localhost:9515')
  					.forBrowser('chrome')
  					.build();
 
