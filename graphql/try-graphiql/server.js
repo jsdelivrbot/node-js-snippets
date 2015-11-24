@@ -48,27 +48,38 @@ var data = {
   }
 };
 
+/*
+
+type User {
+   id: int
+   name: string
+}
+
+*/
+
 var userType = new GraphQLObjectType({
   name: 'User',
   fields: {
     id: { type: GraphQLInt },
-    name: { type: GraphQLString },
+    name: { type: GraphQLString }
   }
 });
 
-var schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: 'Query',
-    fields: {
+var queryType = new GraphQLObjectType({
+  name: 'Query',
+  fields: {
       user: {
         type: userType,
         args: {
-          id: { type: GraphQLInt }
+            id: { type: GraphQLInt }
         },
         resolve: function (_, args) {
           return data[args.id];
         }
       }
-    }
-  })
+  }
+});
+
+var schema = new GraphQLSchema({
+  query: queryType
 });
