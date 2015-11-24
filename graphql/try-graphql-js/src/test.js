@@ -1,7 +1,9 @@
-var graphql = require('graphql').graphql;
-var GraphQLSchema = require('graphql').GraphQLSchema;
-var GraphQLObjectType = require('graphql').GraphQLObjectType;
-var GraphQLString = require('graphql').GraphQLString;
+import {
+  graphql,
+  GraphQLSchema,
+  GraphQLObjectType,
+  GraphQLString
+} from 'graphql';
 
 var schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -23,7 +25,7 @@ var schema = new GraphQLSchema({
   })
 });
 
-var query = '{ hi }';
+var query = '{ hello }';
 
 graphql(schema, query).then(result => {
 
