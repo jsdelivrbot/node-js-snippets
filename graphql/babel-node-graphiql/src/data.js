@@ -1,0 +1,16 @@
+var data = {
+  1: {
+    "id": 1,
+    "name": "Dan"
+  },
+  2: {
+    "id": 2,
+    "name": "Lee"
+  },
+  3: {
+    "id": 3,
+    "name": "Nick"
+  }
+};
+
+export {data as default};
