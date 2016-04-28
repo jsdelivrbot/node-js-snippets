@@ -28,7 +28,10 @@ class DragBar extends React.Component{
     $( `#${this.props.id}`).draggable({ 
       axis: "y",
       start: this.props.dragStart,
-      drag: this.props.dragging,
+      drag: () => {
+        let position = $( `#${this.props.id}`).position();
+        this.props.dragging(position);
+      },
       stop: () => {
         let position = $( `#${this.props.id}`).position();
         this.props.dragStop(position);
@@ -129,8 +132,8 @@ class Container extends React.Component {
           id={this.state.dragBar.id}
           top={this.state.dragBar.top}
           dragStart={this.logPositions}
-          dragging={() => console.log('dragging')}
-          dragStop={this.resize}
+          dragging={this.resize}
+          dragStop={this.logPositions}
         />
         <Pane id={this.state.pane2.id} height={this.state.pane2.height}/>
       </div>
