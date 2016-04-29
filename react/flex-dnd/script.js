@@ -49,5 +49,5 @@ console.log(ReactDOMServer.renderToString(<C1/>));
 let C1Wrapped = wrap(C1);
 console.log(C1Wrapped);
 let c1Wrapped =  <C1Wrapped height={101} width={100}/>;
-let rendered = ReactDOMServer.renderToString(c1Wrapped);
+let rendered = ReactDOMServer.renderToStaticMarkup(c1Wrapped);
 console.log(rendered);
