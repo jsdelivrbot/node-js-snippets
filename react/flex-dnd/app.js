@@ -3,21 +3,26 @@ import ReactDOM  from 'react-dom';
 
 var $ = require('jquery');
 require('jquery-ui');
- 
-// or load just the modules you need 
 require('jquery-ui/draggable');
 require('jquery-ui/droppable');
 
 class Pane extends React.Component {
+  
+  constructor(props, c){
+    super();
+    console.log(props, c);
+  }
+  
   componentDidMount(){
-    // $( `#${this.props.id}`).draggable({       
-    //   revert: true,
-    //   snap: true,
-    //   drag: () => {
-    //     let position = $( `#${this.props.id}`).position();
-    //     console.log(position);
-    //   }
-    // });  
+    let elem = $(this.refs['pane']);
+    elem.draggable({       
+      revert: true,
+      snap: true,
+      drag: () => {
+        let position = elem.position();
+        console.log(position);
+      }
+    });  
   }
   
   render(){
@@ -29,7 +34,7 @@ class Pane extends React.Component {
     };
     
     return (
-      <div style={paneStyle}/>
+      <div ref="pane" style={paneStyle}/>      
     );
   }
 }
@@ -65,7 +70,8 @@ class DragBar extends React.Component{
       position: 'absolute',
       top: this.props.top,
       left: this.props.left,
-      opacity: 0.0
+      opacity: 0.2,
+      zIndex: 1000
     };
     return (
       <div
@@ -182,18 +188,18 @@ class Container extends React.Component {
     });      
   }
   
-  logPositions = () => {
+  logState = () => {
     console.log(this.state);
   }
   
   componentDidMount(){
     console.log('componentDidMount');
-    this.logPositions();
+    this.logState();
   }
   
   componentDidUpdate(){
     console.log('componentDidUpdate');
-    this.logPositions();
+    this.logState();
   }
   
   render(){    
@@ -205,15 +211,14 @@ class Container extends React.Component {
     const rightContainerStyle = {
       display: 'flex',
       flexDirection: 'column'      
-    };
-    
+    };    
     
     return (
       <div style={containerStyle}>
         <Pane height={this.state.map.height} 
               width={this.state.map.width}
               marginLeft={0}
-              color='cyan'/>
+              color='#086A87'/>
         <DragBar 
             top={this.state.vDragBar.top}
             height={this.state.vDragBar.height}
@@ -228,7 +233,7 @@ class Container extends React.Component {
           <Pane height={this.state.pane1.height} 
                 width={this.state.pane1.width}
                 marginLeft={0}
-                color='fuchsia'/>
+                color='#8A2908'/>
           <DragBar 
             top={this.state.hDragBar.top}
             height={this.state.hDragBar.height}
@@ -242,7 +247,7 @@ class Container extends React.Component {
           <Pane height={this.state.pane2.height} 
                 width={this.state.pane2.width}
                 marginLeft={0}
-                color='blue'/>
+                color='#0B6121'/>
         </div>
       </div>
     );
