@@ -27,8 +27,7 @@ let wrapped = C => {
       const paneStyle = {            
         width: this.props.width,      
         height: this.props.height,
-        marginLeft: this.props.marginLeft,
-        background: this.props.color,
+        marginLeft: this.props.marginLeft
       };
       
       return (
@@ -42,14 +41,22 @@ let wrapped = C => {
 
 let C1_ = class extends React.Component {  
   render(){
-    console.log('C1_', this.props);  
-    return (<div>C1</div>);
+    console.log('C1_', this.props);
+    const c1Style = {
+      height: this.props.height, 
+      width: this.props.width,
+      background: '#086A87'
+    };
+    return (<div style={c1Style}>C1</div>);
   }
 }
 
 let C1 = wrapped(C1_);
-let C2 = wrapped(() => <div>C2</div>);
-let C3 = wrapped(() => <div>C3</div>);
+let C2 = wrapped(({height, width}) => {
+  console.log('C2', height, width);
+  return <div style={{height: height, width: width, background: '#8A2908'}}>C2</div>
+});
+let C3 = wrapped(({height, width}) => <div style={{height: height, width: width, background: '#0B6121'}}>C3</div>);
 
 class DragBar extends React.Component{  
   componentDidMount(){
@@ -229,8 +236,7 @@ class Container extends React.Component {
       <div style={containerStyle}>
         <C1 height={this.state.map.height} 
               width={this.state.map.width}
-              marginLeft={0}
-              color='#086A87'/>
+              marginLeft={0}/>
         <DragBar 
             top={this.state.vDragBar.top}
             height={this.state.vDragBar.height}
@@ -244,8 +250,7 @@ class Container extends React.Component {
         <div style={rightContainerStyle}>
           <C2 height={this.state.pane1.height} 
                 width={this.state.pane1.width}
-                marginLeft={0}
-                color='#8A2908'/>
+                marginLeft={0}/>
           <DragBar 
             top={this.state.hDragBar.top}
             height={this.state.hDragBar.height}
@@ -258,8 +263,7 @@ class Container extends React.Component {
           />
           <C3 height={this.state.pane2.height} 
                 width={this.state.pane2.width}
-                marginLeft={0}
-                color='#0B6121'/>
+                marginLeft={0}/>
         </div>
       </div>
     );
