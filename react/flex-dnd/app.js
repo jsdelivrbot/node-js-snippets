@@ -6,38 +6,50 @@ require('jquery-ui');
 require('jquery-ui/draggable');
 require('jquery-ui/droppable');
 
-class Pane extends React.Component {
-  
-  constructor(props, c){
-    super();
-    console.log(props, c);
-  }
-  
-  componentDidMount(){
-    let elem = $(this.refs['pane']);
-    elem.draggable({       
-      revert: true,
-      snap: true,
-      drag: () => {
-        let position = elem.position();
-        console.log(position);
-      }
-    });  
-  }
-  
-  render(){
-    const paneStyle = {            
-      width: this.props.width,      
-      height: this.props.height,
-      marginLeft: this.props.marginLeft,
-      background: this.props.color,
-    };
+
+
+let wrapped = C => {
+  return class Pane extends React.Component {      
+    componentDidMount(){
+      let elem = $(this.refs['pane']);
+      elem.draggable({       
+        revert: true,
+        snap: true,
+        drag: () => {
+          let position = elem.position();
+          console.log(position);
+        }
+      });  
+    }
     
-    return (
-      <div ref="pane" style={paneStyle}/>      
-    );
+    render(){
+      console.log('PANE', this.props);
+      const paneStyle = {            
+        width: this.props.width,      
+        height: this.props.height,
+        marginLeft: this.props.marginLeft,
+        background: this.props.color,
+      };
+      
+      return (
+        <div ref="pane" style={paneStyle}>
+          <C width={this.props.width} height={this.props.height}/>
+        </div>     
+      );
+    }
+  }
+};
+
+let C1_ = class extends React.Component {  
+  render(){
+    console.log('C1_', this.props);  
+    return (<div>C1</div>);
   }
 }
+
+let C1 = wrapped(C1_);
+let C2 = wrapped(() => <div>C2</div>);
+let C3 = wrapped(() => <div>C3</div>);
 
 class DragBar extends React.Component{  
   componentDidMount(){
@@ -215,7 +227,7 @@ class Container extends React.Component {
     
     return (
       <div style={containerStyle}>
-        <Pane height={this.state.map.height} 
+        <C1 height={this.state.map.height} 
               width={this.state.map.width}
               marginLeft={0}
               color='#086A87'/>
@@ -230,7 +242,7 @@ class Container extends React.Component {
             left={this.state.vDragBar.left}
         />
         <div style={rightContainerStyle}>
-          <Pane height={this.state.pane1.height} 
+          <C2 height={this.state.pane1.height} 
                 width={this.state.pane1.width}
                 marginLeft={0}
                 color='#8A2908'/>
@@ -244,7 +256,7 @@ class Container extends React.Component {
             axis={this.state.hDragBar.axis}
             marginLeft={0}
           />
-          <Pane height={this.state.pane2.height} 
+          <C3 height={this.state.pane2.height} 
                 width={this.state.pane2.width}
                 marginLeft={0}
                 color='#0B6121'/>
