@@ -1,4 +1,16 @@
+import React from 'react';
+import ReactDOM  from 'react-dom';
 import { createStore } from 'redux';
+
+let store = createStore(counter);
+
+let C = (props) => {
+  return <div>{props.value}</div>;
+};
+
+function render(value){
+  ReactDOM.render(<C value={value}/>, document.getElementById('react'));  
+}
 
 function counter(state = 0, action) {
   switch (action.type) {
@@ -7,20 +19,15 @@ function counter(state = 0, action) {
   case 'DECREMENT':
     return state - 1
   default:
-    return state
+    return state;
   }
 }
 
-let store = createStore(counter);
+store.subscribe(() => {
+  let value = store.getState();
+  render(value);
+});
 
-store.subscribe(() =>
-  console.log(store.getState())
-);
-
-store.dispatch({ type: 'INCREMENT' });
-// 1
-store.dispatch({ type: 'INCREMENT' });
-// 2
-store.dispatch({ type: 'DECREMENT' });
-
-
+setInterval(() => {
+  store.dispatch({ type: 'INCREMENT' });  
+}, 1000);
