@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
 
+import _ from 'lodash';
+
 var $ = require('jquery');
 require('jquery-ui/draggable');
+require('jquery-ui/droppable');
 
-let wrapped = C => {
+let wrapped = (C) => {
   return class Pane extends React.Component {      
     componentDidMount(){
       let elem = $(this.refs['pane']);
@@ -15,7 +18,14 @@ let wrapped = C => {
           let position = elem.position();
           console.log(position);
         }
-      });  
+      });
+      
+      elem.droppable({
+        drop: (e, ui) => {
+          console.log(e);
+          console.log(ui.draggable);
+        }
+      })
     }
     
     render(){
@@ -26,8 +36,10 @@ let wrapped = C => {
         marginLeft: this.props.marginLeft
       };
       
+      const uniqueId = _.uniqueId('pane_');
+      
       return (
-        <div ref="pane" style={paneStyle}>
+        <div id={uniqueId} ref="pane" style={paneStyle}>
           <C width={this.props.width} height={this.props.height}/>
         </div>     
       );
