@@ -128,9 +128,10 @@ class Container extends React.Component {
     this.state = {
       height: height,
       width: width,
-      pane1: {
-        height: height,
-        width: width/2 
+      pane1: {        
+        element: <C1 height={height} 
+                      width={width/2}
+                      marginLeft={0}/> 
       },
       vDragBar: {
         top: 8,
@@ -146,12 +147,14 @@ class Container extends React.Component {
         axis: 'y'
       },
       pane2: {
-        height: height/2,
-        width: width/2
+        element: <C2 height={height/2} 
+                      width={width/2}
+                      marginLeft={0}/>
       },
       pane3: {
-        height: height/2,
-        width: width/2
+        element: <C3 height={height/2} 
+                      width={width/2}
+                      marginLeft={0}/>
       }  
     };   
   }
@@ -163,8 +166,7 @@ class Container extends React.Component {
         
     this.setState({
       pane1: {
-        height: this.state.pane1.height,
-        width: this.state.pane1.width
+        element: this.state.pane1.element
       },
       vDragBar: {
         top: 10,
@@ -177,12 +179,14 @@ class Container extends React.Component {
         width: this.state.hDragBar.width
       },
       pane2: {
-        height: height1 - 3,
-        width: this.state.pane2.width
+        element: <C2 height={height1 - 3} 
+                      width={this.state.pane2.element.props.width}
+                      marginLeft={0}/>
       },
       pane3: {
-        height: height2 + 3,
-        width: this.state.pane3.width
+        element: <C3 height={height2 + 3} 
+                      width={this.state.pane3.element.props.width}
+                      marginLeft={0}/>
       }  
     });        
   }
@@ -194,8 +198,9 @@ class Container extends React.Component {
         
     this.setState({
       pane1: {
-        height: this.state.pane1.height,
-        width: width1
+        element: <C1 height={this.state.pane1.element.props.height} 
+                      width={width1}
+                      marginLeft={0}/>
       },
       vDragBar: {
         top: 10,
@@ -208,12 +213,14 @@ class Container extends React.Component {
         width: width2
       },
       pane2: {
-        height: this.state.pane2.height,
-        width: width2      
+        element: <C2 height={this.state.pane2.element.props.height} 
+                      width={width2}
+                      marginLeft={0}/>
       },
       pane3: {
-        height: this.state.pane3.height,
-        width: width2
+        element: <C3 height={this.state.pane3.element.props.height} 
+                      width={width2}
+                      marginLeft={0}/>
       }  
     });      
   }
@@ -243,11 +250,11 @@ class Container extends React.Component {
       flexDirection: 'column'      
     };    
     
+    console.log(this.state);
+    
     return (
       <div style={containerStyle}>
-        <C1 height={this.state.pane1.height} 
-              width={this.state.pane1.width}
-              marginLeft={0}/>
+        {this.state.pane1.element}
         <DragBar 
             top={this.state.vDragBar.top}
             height={this.state.vDragBar.height}
@@ -259,9 +266,7 @@ class Container extends React.Component {
             left={this.state.vDragBar.left}
         />
         <div style={rightContainerStyle}>
-          <C2 height={this.state.pane2.height} 
-                width={this.state.pane2.width}
-                marginLeft={0}/>
+          {this.state.pane2.element}
           <DragBar 
             top={this.state.hDragBar.top}
             height={this.state.hDragBar.height}
@@ -272,9 +277,7 @@ class Container extends React.Component {
             axis={this.state.hDragBar.axis}
             marginLeft={0}
           />
-          <C3 height={this.state.pane3.height} 
-                width={this.state.pane3.width}
-                marginLeft={0}/>
+          {this.state.pane3.element}
         </div>
       </div>
     );
