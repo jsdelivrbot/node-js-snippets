@@ -29,10 +29,7 @@ let wrapped = (C) => {
       });
 
       $(elem).droppable({
-        drop: (e, ui) => {
-          console.log(e);
-          console.log(ui.draggable);
-        }
+        drop: this.props.dragNDrop
       })
     }
 
@@ -167,17 +164,20 @@ class Container extends React.Component {
         {
           element: <C1 height={height}
             width={width / 2}
-            marginLeft={0}/>
+            marginLeft={0}
+            dragNDrop={this.dragNDrop}/>
         },
         {
           element: <C2 height={height / 2}
             width={width / 2}
-            marginLeft={0}/>
+            marginLeft={0}
+            dragNDrop={this.dragNDrop}/>
         },
         {
           element: <C3 height={height / 2}
             width={width / 2}
-            marginLeft={0}/>
+            marginLeft={0}
+            dragNDrop={this.dragNDrop}/>
         }
       ],
       vDragBar: {
@@ -264,6 +264,10 @@ class Container extends React.Component {
         width: width2
       }
     });
+  }
+  
+  dragNDrop = (dragged, droped) => {
+    console.log(dragged, droped);
   }
 
   logState = () => {
