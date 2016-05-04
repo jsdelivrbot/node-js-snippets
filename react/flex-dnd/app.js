@@ -2,11 +2,7 @@ import React from 'react';
 import ReactDOM  from 'react-dom';
 
 var $ = require('jquery');
-require('jquery-ui');
 require('jquery-ui/draggable');
-require('jquery-ui/droppable');
-
-
 
 let wrapped = C => {
   return class Pane extends React.Component {      
