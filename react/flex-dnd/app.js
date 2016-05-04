@@ -155,7 +155,7 @@ class Container extends React.Component {
 
     let height = $(window).height() - 50;
     let width = $(window).width() - 50;
-    
+
     this.state = {
       height: height,
       width: width,
@@ -165,12 +165,12 @@ class Container extends React.Component {
           width={width / 2}
           marginLeft={0}
           dragNDrop={this.dragNDrop}/>,
-        <C2 id="c2" 
+        <C2 id="c2"
           height={height / 2}
           width={width / 2}
           marginLeft={0}
           dragNDrop={this.dragNDrop}/>,
-        <C3 id="c3" 
+        <C3 id="c3"
           height={height / 2}
           width={width / 2}
           marginLeft={0}
@@ -193,26 +193,26 @@ class Container extends React.Component {
   }
 
   hResize = (dragPosition) => {
-    const { height, width, panes, vDragBar} = this.state;
+    const { height, width, panes, vDragBar, hDragBar} = this.state;
     const height1 = dragPosition.top;
     const height2 = this.state.height - dragPosition.top;
 
     let newPane1Props = _.cloneDeep(panes[1].props);
-    newPane1Props.height = height1-3;
+    newPane1Props.height = height1 - 3;
     let newPane2Props = _.cloneDeep(panes[2].props);
     newPane2Props.height = height2 + 3;
-       
+
     this.setState({
       panes: [
-      this.state.panes[0],
-      <C2 {...newPane1Props}/>,
-      <C3 {...newPane2Props}/>
-    ],
+        this.state.panes[0],
+        <C2 {...newPane1Props}/>,
+        <C3 {...newPane2Props}/>
+      ],
       vDragBar: vDragBar,
       hDragBar: {
         top: height1 + 4,
         height: 6,
-        width: this.state.hDragBar.width
+        width: hDragBar.width
       }
     });
   }
@@ -222,7 +222,7 @@ class Container extends React.Component {
     let width1 = dragPosition.left - 5;
     let width2 = width - dragPosition.left;
 
-    let newProps = _.map(panes, pane =>  _.cloneDeep(pane.props));
+    let newProps = _.map(panes, pane => _.cloneDeep(pane.props));
     newProps[0].width = width1;
     newProps[1].width = width2;
     newProps[2].width = width2;
@@ -235,33 +235,39 @@ class Container extends React.Component {
       ],
       vDragBar: vDragBar,
       hDragBar: {
-        top: this.state.hDragBar.top,
+        top: hDragBar.top,
         height: 5,
         width: width2
       }
     });
   }
-  
+
   dragNDrop = (dropped, dragged) => {
+    const { panes } = this.state;
     let droppedId = dropped.target.id;
     let draggedId = dragged.draggable.context.id;
     console.log('dropped: ', droppedId);
     console.log('dragged: ', draggedId);
-    console.log(this.state.panes[0].props);
+    console.log(panes[0].props);
     let droppedIdx = _.findIndex(this.state.panes, (pane) => {
-      return pane.props.id === droppedId;       
+      return pane.props.id === droppedId;
     });
-    
+
     let draggedIdx = _.findIndex(this.state.panes, (pane) => {
-      return pane.props.id === draggedId;       
+      return pane.props.id === draggedId;
     });
-    
-    console.log(draggedIdx, droppedIdx);
-    
-    let newArray = 
-    this.setState({
-      
-    });
+
+    if (droppedIdx > -1 && draggedIdx > -1) {
+
+      console.log(draggedIdx, droppedIdx);
+
+      let tmp = panes[droppedIdx];
+      panes[droppedIdx] = panes[draggedIdx];
+      panes[draggedIdx] = tmp;
+      this.setState({
+        panes: panes
+      });
+    }
   }
 
   logState = () => {
