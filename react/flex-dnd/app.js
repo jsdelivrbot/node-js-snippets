@@ -261,9 +261,27 @@ class Container extends React.Component {
 
       console.log(draggedIdx, droppedIdx);
 
-      let tmp = panes[droppedIdx];
-      panes[droppedIdx] = panes[draggedIdx];
-      panes[draggedIdx] = tmp;
+      let droppedPane = panes[droppedIdx];
+      let draggedPane = panes[draggedIdx];
+      
+      let newDroppedPane = React.createElement(droppedPane.type, {
+        id: droppedPane.props.id,
+        marginLeft: droppedPane.props.marginLeft,
+        dragNDrop: droppedPane.props.dragNDrop,
+        height: draggedPane.props.height,
+        width: draggedPane.props.width
+      });
+      
+      let newDraggedPane = React.createElement(draggedPane.type, {
+        id: draggedPane.props.id,
+        marginLeft: draggedPane.props.marginLeft,
+        dragNDrop: draggedPane.props.dragNDrop,
+        height: droppedPane.props.height,
+        width: droppedPane.props.width
+      });
+      
+      panes[droppedIdx] = newDraggedPane;      
+      panes[draggedIdx] = newDroppedPane;
       this.setState({
         panes: panes
       });
