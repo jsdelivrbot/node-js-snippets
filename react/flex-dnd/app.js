@@ -30,7 +30,7 @@ let wrapped = (C) => {
 
       $(elem).droppable({
         drop: this.props.dragNDrop
-      })
+      });
     }
 
     render() {
@@ -65,6 +65,13 @@ let C1_ = class extends React.Component {
     });
   }
 
+  componentDidMount(){
+    let div = this.refs['div'];
+    $(div).droppable({
+      drop: (e, ui) => console.log('drop to C1_', e, ui)
+    });
+  }
+
   render() {
     console.log('C1_', this.props, this.state);
     const c1Style = {
@@ -72,7 +79,7 @@ let C1_ = class extends React.Component {
       width: this.props.width,
       background: '#086A87'
     };
-    return (<div onClick={this.onClick} style={c1Style}>C1 {this.state.count}</div>);
+    return (<div ref='div' onClick={this.onClick} style={c1Style}>C1 {this.state.count}</div>);
   }
 }
 
@@ -263,7 +270,7 @@ class Container extends React.Component {
 
       let droppedPane = panes[droppedIdx];
       let draggedPane = panes[draggedIdx];
-      
+
       let newDroppedPane = React.createElement(droppedPane.type, {
         id: droppedPane.props.id,
         marginLeft: droppedPane.props.marginLeft,
@@ -271,7 +278,7 @@ class Container extends React.Component {
         height: draggedPane.props.height,
         width: draggedPane.props.width
       });
-      
+
       let newDraggedPane = React.createElement(draggedPane.type, {
         id: draggedPane.props.id,
         marginLeft: draggedPane.props.marginLeft,
@@ -279,8 +286,8 @@ class Container extends React.Component {
         height: droppedPane.props.height,
         width: droppedPane.props.width
       });
-      
-      panes[droppedIdx] = newDraggedPane;      
+
+      panes[droppedIdx] = newDraggedPane;
       panes[draggedIdx] = newDroppedPane;
       this.setState({
         panes: panes
