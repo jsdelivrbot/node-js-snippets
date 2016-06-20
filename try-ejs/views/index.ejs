@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>EJS & Express</title>
+  </head>
+  <body>
+    <% include header %>
+    <ul>
+      <% for(var i = 0; i<5; i++){%>
+        <li><%=data[i]%></li>
+      <%}%>
+    </ul>
+    <% include footer %>
+  </body>
+</html>
