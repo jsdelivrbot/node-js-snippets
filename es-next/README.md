@@ -10,4 +10,4 @@
   }
 ```
 
-`./node_modules/.bin/babel-node main.js`
+`./node_modules/.bin/babel-node ./<folder>/main.js`
