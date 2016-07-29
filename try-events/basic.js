@@ -34,3 +34,10 @@ ee.on('test', function(a, b, c){ console.log('1:', a,b,c);});
 ee.on('test', function(a, b){ console.log('2:', a,b);});
 console.log(ee.getSubscribersCount('test'));
 ee.emit('test', 1, 2, 3);
+
+var ee2 = emitter();
+console.log(ee2.getSubscribersCount('test'));
+ee2.on('test', function(a, b, c){ console.log('3:', a,b,c);});
+ee2.on('test', function(a, b){ console.log('4:', a,b);});
+console.log(ee2.getSubscribersCount('test'));
+ee2.emit('test', 1, 2, 3);
