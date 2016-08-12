@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <title>plotly</title>
+  </head>
+<body>
+  <div id="graph1">
+  </div>
+  <div id="graph2">
+  </div>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script>
+    var graph1 = document.getElementById('graph1');
+
+    var d3 = Plotly.d3;
+
+    var N = 40;
+    var data = d3.range(4).map(function(){
+      var x = d3.range(N);
+      var y = d3.range(N).map( d3.random.normal() );
+      return { x:x, y:y };
+    });
+
+    layout = { title:'Click-drag to zoom' };
+
+    Plotly.plot(graph1, data, layout);
+
+    graph1.on('plotly_relayout',
+        function(eventdata){
+            alert( 'ZOOM!' + '\n\n' +
+                'Event data:' + '\n' +
+                JSON.stringify(eventdata) + '\n\n' +
+                'x-axis start:' + eventdata['xaxis.range[0]'] + '\n' +
+                'x-axis end:' + eventdata['xaxis.range[1]'] );
+        });
+
+    var data2 = [{
+      x: [1, 2, 3, 4],
+      y: [10, 15, 13, 17],
+      mode: 'markers',
+      type: 'scatter'
+    }];
+
+    Plotly.newPlot('graph2', data2);
+    var graph2 = document.getElementById('graph2');
+    graph2.on('plotly_relayout', function(e){
+      console.log('graph2..', graph2.data[0].x, e);
+      console.log(e['xaxis.range[0]']);
+      var minX = e['xaxis.range[0]'];
+      var maxX = e['xaxis.range[1]'];
+      var minY = e['yaxis.range[0]'];
+      var maxY = e['yaxis.range[1]'];
+
+      var selected = graph2.data[0].x.reduce(function(acc, x, i){
+        console.log(acc, x, i);
+        if(x > minX
+          && x < maxX
+          && graph2.data[0].y[i] > minY
+          && graph2.data[0].y[i] < maxY){
+          acc.push(i);
+        }
+        return acc;
+      }, []);
+      console.log(selected);
+
+      var newData = selected.map(function(x){
+        return data[x];
+      });
+
+      console.log(newData);
+      // redraw
+      graph1.data = newData;
+      Plotly.redraw(graph1);
+
+    });
+
+  </script>
+</body>
+</html>
