@@ -1,0 +1,62 @@
+<html>
+
+<head>
+  <title>plotly</title>
+</head>
+
+<body>
+  <div id="graph1">
+  </div>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.min.js"></script>
+  <script>
+    var graph1 = document.getElementById('graph1');
+
+    var d3 = Plotly.d3;
+
+    var N = 400;
+    var data = d3.range(4).map(function(_, i){
+      var x = d3.range(N);
+      var y = d3.range(N).map(function(n){ return n * Math.pow(100, i);});
+      return { x:x, y:y };
+    });
+
+    console.log(data[2].y);
+
+    var formatPercent = d3.format(".0%");
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .tickFormat(formatPercent);
+
+    layout = {
+      title:'axes',
+      xaxis: {
+        title: 'x Axis',
+        titlefont: {
+          family: 'Courier New, monospace',
+          size: 18,
+          color: '#7f7f7f'
+        }
+      },
+      yaxis: {
+        title: 'y Axis',
+        titlefont: {
+          family: 'Courier New, monospace',
+          size: 18,
+          color: '#7f7f7f'
+        },
+        tickmode: 'array',
+        tickvals: [50000000, 200000000, 3000000000],
+        ticktext: ['A', 'B', 'C']
+      }
+    };
+
+    Plotly.plot(graph1, data, layout);
+
+  </script>
+</body>
+
+</html>

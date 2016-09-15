@@ -22,7 +22,7 @@ var MyFirstGrid = React.createClass({
 
     // layout is an array of objects, see the demo for more complete usage
     var layout = [
-      {i: 'a', x: 0, y: 0, w: 6, h: 6},
+      {i: 'a', x: 0, y: 0, w: 6, h: 6, isDraggable: false},
       {i: 'b', x: 6, y: 0, w: 6, h: 6},
       {i: 'c', x: 0, y: 6, w: 6, h: 6},
       {i: 'd', x: 6, y: 6, w: 6, h: 6},
@@ -34,7 +34,8 @@ var MyFirstGrid = React.createClass({
     }
 
     return (
-      <ReactGridLayout className="layout" layout={layout} cols={12} rowHeight={rowHeight} width={width}>
+      <ReactGridLayout className="layout" layout={layout} cols={12} rowHeight={rowHeight} width={width}
+        onDragStop={() => console.log('drag stop')}>
         <div style={divStyle} key={'a'}>a</div>
         <div style={divStyle} key={'b'}>b</div>
         <div style={divStyle} key={'c'}>c</div>
