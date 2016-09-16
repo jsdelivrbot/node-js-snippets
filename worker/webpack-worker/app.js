@@ -1,7 +1,7 @@
 console.log('main');
 
 var Worker = require("worker?inline!./fibworker.js");
-var worker = new Worker('./fibworker.js');
+var worker = new Worker();
 
 console.log(worker);
 worker.onmessage = function (msg) {
