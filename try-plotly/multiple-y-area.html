@@ -1,0 +1,72 @@
+<html>
+
+<head>
+  <title>plotly</title>
+</head>
+
+<body>
+  <div id="graph1">
+  </div>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.min.js"></script>
+  <script>
+    // https://plot.ly/javascript/multiple-axes/
+    // https://plot.ly/javascript/filled-area-plots/
+    var graph1 = document.getElementById('graph1');
+
+    var data = [
+      { // area
+        x: [4,5],
+        y: [10,10],
+        fill: 'tozeroy',
+        mode: 'none',
+        yaxis: 'y2',
+        fillcolor: 'rgba(147,112,219,0.1)',
+      },
+      {
+        x: [0,1,2,3,4,5],
+        y: [1000,1100,1200,1300,1400,1500]
+      },
+      {
+        x: [0,1,2,3,4,5],
+        y: [500,2100,2200,2300,2400,2500]
+      },
+      { // data for second y-axis
+        x: [0,1,2,3,4,5],
+        y: [0,1,2,3,4,5],
+        yaxis: 'y2'
+      },
+      {
+        x: [0,1,2,3,4,5],
+        y: [0,2,4,6,8,8],
+        yaxis: 'y2'
+      }    
+    ];
+
+    layout = {
+      title:'axes',
+      xaxis: {
+        title: 'x Axis',
+        titlefont: {
+          family: 'Courier New, monospace',
+          size: 18,
+          color: '#7f7f7f'
+        }
+      },
+      yaxis: {
+        title: 'y Axis',
+        tickformat: 's'
+      },
+      yaxis2: {
+        title: 'y Axis 2',
+        overlaying: 'y',
+        side: 'right'
+      }
+    };
+
+    Plotly.plot(graph1, data, layout);
+  </script>
+</body>
+
+</html>
