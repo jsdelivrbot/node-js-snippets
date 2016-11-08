@@ -1,5 +1,7 @@
 import React from 'react'
 function test(){
+  console.log('test')
+
   return <div>TEST</div>
 }
 

@@ -2,16 +2,42 @@ import React from 'react'
 import posts from '../data/posts'
 import { style } from 'next/css'
 import Link from 'next/link'
+import AuthService from '../utils/AuthService'
+import {auth0_id,auth0_domain} from '../secret/auth0'
 
 export default class extends React.Component {
-  static getInitialProps () {
+  static getInitialProps ({ req, res}) {
     return { posts: posts }
   }
 
-  render () {
+  constructor(props) {
+    super(props)
+    this.state = { loggedIn: false }
+  }
+
+  componentDidMount() {
+    this.auth = new AuthService(auth0_id,auth0_domain)
+    this.setState({ loggedIn: this.auth.loggedIn() })
+    // instance of Lock
+    this.lock = this.auth.getLock();
+    this.lock.on('authenticated', () => {
+      this.setState({ loggedIn: this.auth.loggedIn() })
+    });
+  }
+
+  login() {
+    this.auth.login();
+  }
+
+  render() {
+
+   const loginButton = this.state.loggedIn ? <div>HELLO</div> : <button onClick={this.login.bind(this)}>Login</button>;
+
     return (
       <div>
       <div className={style(styles.header)}>
+        <script src="https://cdn.auth0.com/js/lock/10.5/lock.min.js"></script>
+        { loginButton }
         <h3> NEXTHRONE - THE REVELATION OF GAME OF THRONES' CHARACTERS </h3>
       </div>
       <table className={style(styles.table)}>
@@ -27,7 +53,7 @@ export default class extends React.Component {
                   <tr key={i}>
                       <td className={style(styles.td)}>{ post.codeName }</td>
                       <td className={style(styles.td)}>
-                        <Link href={`/account?id=${post.id}`}>{ post.realName }</Link>
+                        { this.state.loggedIn ? <Link href={`/account?id=${post.id}`}>{ post.realName }</Link> : <div>You need to login</div> }
                       </td>
                   </tr>
               ))
