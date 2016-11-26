@@ -3,9 +3,11 @@ import { storiesOf, action, linkTo } from '@kadira/storybook';
 import Button from './Button';
 import Welcome from './Welcome';
 import Test from '../src/Test'
+import Test2 from '../src/Test2'
 
 storiesOf('Test', module)
   .add('test', () => <Test/>)
+  .add('test2', () => <Test2/>)
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => (
