@@ -1,19 +1,19 @@
 const EventEmitter = require('events').EventEmitter
 
 class Person extends EventEmitter {
-  constructor(name) {
+  constructor (name) {
     super()
     this.name = name
   }
 
-  changeName(newName) {
+  changeName (newName) {
     let oldName = this.name
     this.name = newName
     this.emit('name-change', oldName, newName)
   }
 }
 
-function l1(oldName, newName) {
+function l1 (oldName, newName) {
   console.log(`change ${oldName} to ${newName}`)
 }
 
@@ -22,7 +22,7 @@ p.on('name-change', l1)
 p.changeName('kk-sk')
 
 // es5
-function Es5Person(name) {
+function Es5Person (name) {
   EventEmitter.call(this)
   this.name = name
 }
