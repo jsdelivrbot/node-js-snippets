@@ -7,6 +7,8 @@
     "start": "babel-node index.js"
   },
   "dependencies": {
+    "express": "^4.14.0",
+    "express-graphql": "^0.6.1",
     "graphql": "^0.8.2",
     "mongodb": "^2.2.21"
   },
