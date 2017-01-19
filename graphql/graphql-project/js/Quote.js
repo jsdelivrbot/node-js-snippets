@@ -1,3 +1,4 @@
+import Relay from 'react-relay'
 import React from 'react'
 
 class Quote extends React.Component {
@@ -11,4 +12,6 @@ class Quote extends React.Component {
   }
 }
 
-export default Quote
+const QuoteRelay = Relay.createContainer(Quote, { fragments: {} })
+
+export default QuoteRelay

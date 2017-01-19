@@ -4,9 +4,11 @@
 
 `yarn add babel-cli babel-core babel-loader babel-preset-es2015 babel-preset-react babel-preset-stage-0 --dev`
 
-## React
+`yarn add babel-relay-plugin --dev`
 
-`yarn add react react-dom`
+## React & Relay
+
+`yarn add react react-dom react-relay`
 
 ## in package.json
 
