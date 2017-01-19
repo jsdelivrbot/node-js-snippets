@@ -6,17 +6,27 @@ import Quote from './quote'
 class QuotesLibrary extends React.Component {
   state = { allQuotes: [] }
 
-  componentDidMount () {
-    fetch(`/graphql?query={
+  async componentDidMount () {
+    let response = await fetch(`/graphql?query={
       allQuotes {
         id,
         text,
         author
       }
     }`)
-    .then(response => response.json())
-    .then(json => this.setState(json.data))
-    .catch(ex => console.error(ex))
+
+    let json = await response.json()
+    this.setState(json.data)
+    // fetch(`/graphql?query={
+    //   allQuotes {
+    //     id,
+    //     text,
+    //     author
+    //   }
+    // }`)
+    // .then(response => response.json())
+    // .then(json => this.setState(json.data))
+    // .catch(ex => console.error(ex))
   }
 
   render () {
