@@ -25,7 +25,9 @@
     "babel-relay-plugin": "^0.10.0"
   },
   "babel": {
+    "passPerPreset": true,
     "presets": [
+      {"plugins": ["./babelRelayPlugin"]},
       "react",
       "es2015",
       "stage-0"

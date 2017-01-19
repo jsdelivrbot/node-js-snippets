@@ -79,3 +79,43 @@
         name
         description
     }
+
+#### fragment samples
+    {
+      quotesLibrary {
+        ...AllQuotes
+      }
+    }
+
+    fragment OneQuote on Quote {
+      text
+      author
+    }
+
+    fragment AllQuotes on QuotesLibrary {
+      allQuotes {
+        id
+        ...OneQuote
+      }
+    }
+
+#### query from Relay
+
+    query QuotesLibrary {
+      quotesLibrary {
+        ...F1
+      }
+    }
+
+    fragment F0 on Quote {
+      text
+      author
+      id
+    }
+
+    fragment F1 on QuotesLibrary {
+      allQuotes {
+        id
+        ...F0
+      }
+    }

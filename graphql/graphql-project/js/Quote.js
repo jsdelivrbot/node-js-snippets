@@ -12,6 +12,15 @@ class Quote extends React.Component {
   }
 }
 
-const QuoteRelay = Relay.createContainer(Quote, { fragments: {} })
+const QuoteRelay = Relay.createContainer(Quote, {
+  fragments: {
+    quote: () => Relay.QL `
+      fragment OneQuote on Quote {
+        text
+        author
+      }
+    `
+    // Quote component will get this.props.quote.text and this.props.quote.author
+  } })
 
 export default QuoteRelay
