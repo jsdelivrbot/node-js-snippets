@@ -20,7 +20,7 @@
 
     ./node_modules/.bin/babel-node --presets es2015,stage-0
 
-### webpack.config.json
+### webpack.config.js
 
     module.exports = {
       entry: './app.js',
