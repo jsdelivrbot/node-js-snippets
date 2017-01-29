@@ -1,0 +1,9 @@
+{
+  "name": "electron-react",
+  "version": "1.0.0",
+  "main": "main.js",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.4.15"
+  }
+}
